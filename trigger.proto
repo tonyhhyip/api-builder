@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "cloud.ysitd.builder";
+option java_outer_classname = "TriggerProto";
+
+package builder.trigger;
+
+option go_package = "builder";
+
+import "github.com/golang/protobuf/ptypes/timestamp/timestamp.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.equal_all) = true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.populate_all) = true;
+option (gogoproto.testgen_all) = true;
+
+enum TriggerSource {
+    GithubWebhook = 0;
+    ApiCall = 1;
+}
+
+message Trigger {
+    TriggerSource source = 1;
+    string repo = 2;
+    google.protobuf.Timestamp sendTime = 3;
+    string commit = 4;
+}
